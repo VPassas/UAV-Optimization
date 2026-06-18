@@ -1,0 +1,19 @@
+# Pip fallback (conda env via environment.yml is preferred on Windows for the
+# geospatial stack: geopandas / osmnx / rtree / GDAL).
+numpy
+scipy
+pandas
+pyarrow
+geopandas
+osmnx
+shapely
+pyproj
+rtree
+scikit-learn
+torch
+matplotlib
+joblib
+tqdm
+jupyterlab
+hydra-core
+wandb

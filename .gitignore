@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Environments
+.venv/
+env/
+venv/
+
+# Data & artifacts (large; tracked via Zenodo, not git)
+data/raw/*
+data/processed/*
+!data/**/.gitkeep
+*.parquet
+*.npz
+*.gpkg
+checkpoints/
+*.ckpt
+*.pt
+
+# Experiment tracking / outputs
+wandb/
+outputs/
+multirun/
+runs/
+
+# OSMnx cache
+cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db

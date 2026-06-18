@@ -1,0 +1,28 @@
+name: uav
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  # numerics
+  - numpy
+  - scipy
+  - pandas
+  - pyarrow          # parquet I/O
+  # geospatial (EUBUCCO / OSM data loader)
+  - geopandas
+  - osmnx
+  - shapely
+  - pyproj
+  - rtree            # spatial index for ray-AABB acceleration
+  # ML
+  - scikit-learn     # baselines: RF, KNN, linear
+  - pytorch          # channel surrogate MLP
+  # tooling
+  - matplotlib
+  - joblib           # parallel data generation
+  - tqdm
+  - jupyterlab
+  - hydra-core       # reproducible experiment configs
+  - pip
+  - pip:
+      - wandb        # experiment tracking (optional; tensorboard also fine)
