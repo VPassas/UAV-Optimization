@@ -22,6 +22,7 @@ dependencies = [
     "matplotlib",
     "joblib",
     "tqdm",
+    "omegaconf",
 ]
 
 [project.optional-dependencies]

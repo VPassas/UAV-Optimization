@@ -1,0 +1,49 @@
+# Shared experiment config (co-owned by Student A and Student B).
+# Schema + defaults live in common/config.py; this file overrides them and is
+# the human-editable entry point. CLI overrides win over this file, e.g.:
+#   python scripts/show_config.py shared.seed=1 surrogate.data.n_mc=50
+
+shared:
+  seed: 0
+  cities: train          # train | test | all | <city name> | [explicit, list]
+  scene:
+    area_size: 1000.0    # metres
+  channel:
+    env: Urban           # AG_ENV key (Suburban/Urban/DenseUrban/Highrise)
+    ptx_dbm: 30.0
+  # paths.* default to repo-relative dirs (see common/config.py); override here
+  # only if you keep data elsewhere.
+
+# --- Student A: channel surrogate ---
+surrogate:
+  data:
+    n_samples: 3000
+    n_mc: 30
+    alt_min: 50.0
+    alt_max: 200.0
+  model:
+    in_features: 14
+    hidden: 128
+    depth: 3
+    heteroscedastic: true
+  train:
+    lr: 1.0e-3
+    weight_decay: 1.0e-4
+    batch_size: 512
+    epochs: 150
+    val_fraction: 0.2
+    early_stop_patience: 20
+
+# --- Student B: trajectory policy (B owns these) ---
+policy:
+  expert:
+    horizon: 5
+  model:
+    arch: deepsets       # deepsets | attention
+    embed_dim: 64
+    hidden: 128
+  train:
+    lr: 3.0e-4
+    batch_size: 256
+    epochs: 100
+    n_max_vehicles: 10
