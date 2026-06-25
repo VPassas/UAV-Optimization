@@ -29,13 +29,38 @@ tests/         # unit tests (feature edge cases, etc.)
 
 ## Setup
 
+Pick **one** of the two options. Both give an importable project (`import common`,
+`import student_a` work from anywhere) and have been verified on Windows.
+
+### Option A — pip + venv (no conda needed)
+
 ```bash
-# 1. Create the environment (conda-forge; best for the geospatial stack on Windows)
+python -m venv .venv
+.venv\Scripts\activate          # Windows  (use: source .venv/bin/activate  on macOS/Linux)
+pip install -e ".[dev]"          # installs deps + the project as a package
+```
+
+`pip install -e .` works because geopandas/osmnx/pyproj/rtree now ship
+self-contained wheels — GDAL no longer needs conda. `torch` installs as the CPU
+build by default; for a CUDA GPU follow https://pytorch.org/get-started (e.g.
+`pip install torch --index-url https://download.pytorch.org/whl/cu124`).
+
+[`uv`](https://docs.astral.sh/uv/) works too and is faster: `uv venv` then
+`uv pip install -e ".[dev]"`.
+
+### Option B — conda (most robust geospatial stack)
+
+```bash
 conda env create -f environment.yml
 conda activate uav
+pip install -e .                 # make common/ and student_a/ importable
+```
 
-# 2. Sanity check
+### Sanity check (either option)
+
+```bash
 python -c "from common.channel import compute_user_rate; print('channel OK')"
+python -m pytest tests -q
 ```
 
 ## Cities (morphological diversity → forces generalization)

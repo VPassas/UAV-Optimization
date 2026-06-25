@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uav-networking"
+version = "0.1.0"
+description = "Learned channel surrogate + trajectory policy for UAV networking"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "pyarrow",
+    "geopandas>=1.0",
+    "osmnx>=2.0",
+    "shapely>=2.0",
+    "pyproj",
+    "rtree",
+    "scikit-learn",
+    "torch",
+    "matplotlib",
+    "joblib",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+extras = ["jupyterlab", "hydra-core", "wandb"]
+
+# The importable packages live at the repo root; the reference simulator in
+# project/ is loaded by path (common.channel), so it need not be a package.
+[tool.setuptools]
+packages = ["common", "student_a"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
